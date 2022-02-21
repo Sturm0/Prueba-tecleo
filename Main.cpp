@@ -26,10 +26,7 @@ void limpiar_pantalla(){
 	//#endif    
 }
 void mostrar_lista(std::string conjunto[],char estado[],unsigned short &mostrar, const int valor = 0){
-	//26 palabras tengo que mostrar por vez
-
 	for (int i = mostrar-25; i <= mostrar ;i++){
-		//std::cout << conjunto[i]+" ";
 		switch(estado[i]){
 			case 'N':
 				printf("%c[%dm%s ", 0x1B, 37,conjunto[i].c_str());
@@ -55,7 +52,7 @@ int main(){
 	unsigned short mostrar = 25; //esta variable es usada para decidir que palabras mostrar y cuales no
 
 	for (int i = 0; i < 200;i++){
-		estado[i] = 'N'; // en realidad quería poner NULL pero no estoy seguro de si funcionaria, después fijarse como lo implementa C++
+		estado[i] = 'N';
 	}
 	/* inicializar semilla para número aleatorio: */
 	 srand (time(NULL));
