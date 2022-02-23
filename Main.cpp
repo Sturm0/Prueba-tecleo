@@ -17,7 +17,7 @@ std::string getOsName()
 
 void limpiar_pantalla(){
 	//esta función no parece estar funcionando del todo bien
-	if (getOsName == "Windows"){
+	if (getOsName() == "Windows"){
 		system("CLS");
 	}
 	else {
@@ -28,7 +28,7 @@ void limpiar_pantalla(){
 }
 void cambiar_asignacion(bool VF){
 	//GNU LINUX CODE <-- hacer que esta sección se ejecute dependiendo del SO
-	if (getOsName == "Linux"){
+	if (getOsName() == "Linux"){
 		if(VF)
 		{
 			system("xmodmap -e \"keycode 36 = space\" && xmodmap -e \"keycode 65 = Return\"");
