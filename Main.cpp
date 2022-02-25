@@ -27,7 +27,6 @@ void limpiar_pantalla(){
 	
 }
 void cambiar_asignacion(bool VF){
-	//GNU LINUX CODE <-- hacer que esta sección se ejecute dependiendo del SO
 	if (getOsName() == "Linux"){
 		if(VF)
 		{
@@ -42,7 +41,7 @@ void cambiar_asignacion(bool VF){
 }
 
 void mostrar_lista(std::string conjunto[],char estado[],unsigned short &mostrar, const int valor = 0){
-	for (int i = mostrar-25; i <= mostrar ;i++){
+	for (short int i = mostrar-25; i <= mostrar ;i++){
 		switch(estado[i]){
 			case 'N':
 				printf("%c[%dm%s ", 0x1B, 37,conjunto[i].c_str());
@@ -84,7 +83,7 @@ int main(){
 	mostrar_lista(array_desordenado,estado,mostrar); 
 
 	
-	for (int i = 0; i < 200 and time(NULL) < tiempo_limite;i++){
+	for (unsigned short i = 0; i < 200 and time(NULL) < tiempo_limite;i++){
 		
 		
 		//std::cout << "\nActual: " << time(NULL) << "\n";
@@ -108,10 +107,16 @@ int main(){
 	}
 
 	unsigned short palabras_correctas = 0;
-	for (int i = 0; i<200;i++){
-		if (estado[i] == 'T') palabras_correctas += 1; 
+	unsigned short pulsaciones = 0;
+	for (unsigned short i = 0; i<200;i++){
+		if (estado[i] == 'T') {
+			palabras_correctas += 1;
+			pulsaciones += array_desordenado[i].length();
+
+		}
 	}
 	cambiar_asignacion(false);
 	std::cout << "\nPalabras por minuto: " << palabras_correctas << "\n";
+	std::cout << "Pulsaciones por minuto: " << pulsaciones << "\n";
 	
 }
