@@ -4,20 +4,18 @@
 #include <stdlib.h> //esto es necesario para obtener números aleatorios y también para limpiar la pantalla
 #include <ctime>
 
-std::string getOsName()
-{
-    #ifdef _WIN32 || _WIN64
-    return "Windows";
-    #elif __linux__ || __unix
-    return "Linux";
-    #else
-    return "Other";
-    #endif
-} 
+#ifdef _WIN32 || _WIN64
+char os_name = 'W';
+#elif __linux__ || __unix
+char os_name = 'L';
+#else
+char os_name = 'O'; //other
+#endif
+
 
 void limpiar_pantalla(){
 	//esta función no parece estar funcionando del todo bien
-	if (getOsName() == "Windows"){
+	if (os_name == 'W'){
 		system("CLS");
 	}
 	else {
@@ -27,7 +25,7 @@ void limpiar_pantalla(){
 	
 }
 void cambiar_asignacion(bool VF){
-	if (getOsName() == "Linux"){
+	if (os_name == 'L'){
 		if(VF)
 		{
 			system("xmodmap -e \"keycode 36 = space\" && xmodmap -e \"keycode 65 = Return\"");
