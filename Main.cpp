@@ -5,11 +5,11 @@
 #include <ctime>
 
 #ifdef _WIN32 || _WIN64
-char os_name = 'W';
+const char os_name = 'W';
 #elif __linux__ || __unix
-char os_name = 'L';
+const char os_name = 'L';
 #else
-char os_name = 'O'; //other
+const char os_name = 'O'; //other
 #endif
 
 
