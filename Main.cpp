@@ -66,22 +66,22 @@ int main(){
 
 	cambiar_asignacion(true);
 
-	for (int i = 0; i < 200;i++){
+	for (uint8_t i = 0; i < 200;i++){ //estoy usando uint8_t porque total i nunca va a tomar un valor mayor a 255
 		estado[i] = 'N';
 	}
 	/* inicializar semilla para número aleatorio: */
 	 srand (time(NULL));
 
-	 for (int i = 0; i < 200 ;i++){
+	 for (uint8_t i = 0; i < 200 ;i++){
 	 	/* generar número aleatorio entre 0 y 200: */
-	 	int num_rand = rand() % 200;
+	 	uint8_t num_rand = rand() % 200;
 		array_desordenado[i] = array[num_rand];
 	}
 
 	mostrar_lista(array_desordenado,estado,mostrar); 
 
 	
-	for (unsigned short i = 0; i < 200 and time(NULL) < tiempo_limite;i++){
+	for (uint8_t i = 0; i < 200 and time(NULL) < tiempo_limite;i++){
 		
 		
 		//std::cout << "\nActual: " << time(NULL) << "\n";
@@ -104,9 +104,9 @@ int main(){
 		
 	}
 
-	unsigned short palabras_correctas = 0;
+	short int palabras_correctas = 0; //por alguna razón si uso uint8_t, al momento de mostrarlo mediante cout me aparece el código ascii correspondiente
 	unsigned short pulsaciones = 0;
-	for (unsigned short i = 0; i<200;i++){
+	for (uint8_t i = 0; i<200;i++){
 		if (estado[i] == 'T') {
 			palabras_correctas += 1;
 			pulsaciones += array_desordenado[i].length();
