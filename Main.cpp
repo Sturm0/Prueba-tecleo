@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstdio> //actualmente únicamente estoy logrando sacar cadenas con color utilizando códigos de escape ANSI y funcionan únicamente mediante "printf" que pertenece a este módulo
 #include <string>
 #include <stdlib.h> //esto es necesario para obtener números aleatorios y también para limpiar la pantalla
 #include <ctime>
@@ -42,13 +41,13 @@ void mostrar_lista(std::string conjunto[],char estado[],unsigned short &mostrar,
 	for (short int i = mostrar-25; i <= mostrar ;i++){
 		switch(estado[i]){
 			case 'N':
-				printf("%c[%dm%s ", 0x1B, 37,conjunto[i].c_str());
+				std::cout << "\x1B[37m" << conjunto[i] << " ";
 				break;
 			case 'T':
-				printf("%c[%dm%s ", 0x1B, 32,conjunto[i].c_str());
+				std::cout << "\x1B[32m" << conjunto[i] << " ";
 				break;
 			default:
-				printf("%c[%dm%s ", 0x1B, 31,conjunto[i].c_str());
+				std::cout << "\x1B[31m" << conjunto[i] << " ";
 				break;
 		}
 	}
