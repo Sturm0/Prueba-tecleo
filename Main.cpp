@@ -37,7 +37,7 @@ void cambiar_asignacion(bool VF){
 	
 }
 
-void mostrar_lista(std::string conjunto[],char estado[],unsigned short &mostrar, const int valor = 0){
+void mostrar_lista(const std::string conjunto[],const char estado[],unsigned short &mostrar, const int valor = 0){
 	for (short int i = mostrar-25; i <= mostrar ;i++){
 		switch(estado[i]){
 			case 'N':
@@ -54,9 +54,8 @@ void mostrar_lista(std::string conjunto[],char estado[],unsigned short &mostrar,
 	if (valor == mostrar-1) mostrar += 25;
 }
 
-int main(){
-	const std::string array[200] = {"de", "Y", "el", "la", "en", "a", "que", "los", "se", "que", "un", "las", "con", "no", "por", "una", "para", "su", "es", "como", "me", "más", "le", "lo", "o", "pero", "sus", "si", "este", "sobre", "entre", "cuando", "también", "todo", "era", "fue", "esta", "ya", "son", "mi", "sin", "la", "años", "ser", "nos", "te", "qué", "dos", "está", "muy", "desde", "porque", "yo", "hasta", "había", "hay", "tiene", "ese", "todos", "hacer", "donde", "eso", "puede", "parte", "vida", "uno", "esa", "tiempo", "él", "ella", "sólo", "dijo", "cada", "vez", "ni", "otro", "después", "otros", "mismo", "hace", "ahora", "les", "estaba", "así", "bien", "e", "día", "año", "aunque", "durante", "país", "siempre", "otra", "tres", "algo", "ver", "mundo", "los", "tan", "antes", "sí", "cómo", "casa", "nada", "trabajo", "estos", "momento", "quien", "están", "gran", "esto", "forma", "mayor", "personas", "ellos", "nacional", "gobierno", "sino", "primera", "unos", "hacia", "tenía", "entonces", "hoy", "lugar", "ante", "luego", "estado", "otras", "días", "tener", "pues", "va", "contra", "nunca", "casi", "tienen", "según", "algunos", "una", "manera", "nuevo", "además", "hombre", "millones", "dar", "mucho", "veces", "menos", "todas", "primer", "presidente", "decir", "mujer", "tu", "solo", "mientras", "cosas", "mí", "debe", "tanto", "aquí", "estas", "ciudad", "fueron", "historia", "más", "sin embargo", "toda", "tras", "pueden", "dice", "tipo", "las", "grupo", "cual", "social", "gente", "sistema", "desarrollo", "mejor", "noche", "misma", "estar", "lado", "muchos", "sea", "cuenta", "mujeres", "agua", "importante", "aún", "dentro", "cuatro", "información", "mis", "madre", "salud", "nuestro", "será"};
-	std::string array_desordenado[200];
+int main(){	
+	std::string array[200] = {"de", "Y", "el", "la", "en", "a", "que", "los", "se", "que", "un", "las", "con", "no", "por", "una", "para", "su", "es", "como", "me", "más", "le", "lo", "o", "pero", "sus", "si", "este", "sobre", "entre", "cuando", "también", "todo", "era", "fue", "esta", "ya", "son", "mi", "sin", "la", "años", "ser", "nos", "te", "qué", "dos", "está", "muy", "desde", "porque", "yo", "hasta", "había", "hay", "tiene", "ese", "todos", "hacer", "donde", "eso", "puede", "parte", "vida", "uno", "esa", "tiempo", "él", "ella", "sólo", "dijo", "cada", "vez", "ni", "otro", "después", "otros", "mismo", "hace", "ahora", "les", "estaba", "así", "bien", "e", "día", "año", "aunque", "durante", "país", "siempre", "otra", "tres", "algo", "ver", "mundo", "los", "tan", "antes", "sí", "cómo", "casa", "nada", "trabajo", "estos", "momento", "quien", "están", "gran", "esto", "forma", "mayor", "personas", "ellos", "nacional", "gobierno", "sino", "primera", "unos", "hacia", "tenía", "entonces", "hoy", "lugar", "ante", "luego", "estado", "otras", "días", "tener", "pues", "va", "contra", "nunca", "casi", "tienen", "según", "algunos", "una", "manera", "nuevo", "además", "hombre", "millones", "dar", "mucho", "veces", "menos", "todas", "primer", "presidente", "decir", "mujer", "tu", "solo", "mientras", "cosas", "mí", "debe", "tanto", "aquí", "estas", "ciudad", "fueron", "historia", "más", "sin embargo", "toda", "tras", "pueden", "dice", "tipo", "las", "grupo", "cual", "social", "gente", "sistema", "desarrollo", "mejor", "noche", "misma", "estar", "lado", "muchos", "sea", "cuenta", "mujeres", "agua", "importante", "aún", "dentro", "cuatro", "información", "mis", "madre", "salud", "nuestro", "será"};
 	char estado[200]; //contiene el estado del array desordenado, esto determina en que color se va a mostrar
 	std::string respuesta;
 	int tiempo_inicial = time(NULL);
@@ -69,26 +68,24 @@ int main(){
 		estado[i] = 'N';
 	}
 	/* inicializar semilla para número aleatorio: */
-	 srand (time(NULL));
+	srand (time(NULL));
 
-	 for (uint8_t i = 0; i < 200 ;i++){
+	for (uint8_t i = 0; i < 200 ;i++){
+	 	//esta sección es para aleatorizar el array
 	 	/* generar número aleatorio entre 0 y 200: */
-	 	uint8_t num_rand = rand() % 200;
-		array_desordenado[i] = array[num_rand];
+	 	uint8_t num_rand1 = rand() % 200;
+	 	uint8_t num_rand2 = rand() % 200;
+		std::swap(array[num_rand1],array[num_rand2]);
 	}
 
-	mostrar_lista(array_desordenado,estado,mostrar); 
+	mostrar_lista(array,estado,mostrar); 
 
 	
 	for (uint8_t i = 0; i < 200 and time(NULL) < tiempo_limite;i++){
-		
-		
-		//std::cout << "\nActual: " << time(NULL) << "\n";
-		//std::cout << "Limite: " << tiempo_limite << "\n";
 		std::cout << "\nPalabra: ";
 		std::cin >> respuesta;
 		
-		if (respuesta == array_desordenado[i]){ 
+		if (respuesta == array[i]){ 
 			estado[i] = 'T';
 		} 
 		else if (respuesta == "salir" or respuesta == "exit"){
@@ -99,7 +96,7 @@ int main(){
 			estado[i] = 'F';
 		}
 		limpiar_pantalla();
-		mostrar_lista(array_desordenado,estado,mostrar,i);
+		mostrar_lista(array,estado,mostrar,i);
 		
 	}
 
@@ -108,7 +105,7 @@ int main(){
 	for (uint8_t i = 0; i<200;i++){
 		if (estado[i] == 'T') {
 			palabras_correctas += 1;
-			pulsaciones += array_desordenado[i].length();
+			pulsaciones += array[i].length();
 
 		}
 	}
