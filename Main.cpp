@@ -1,17 +1,8 @@
-#include <iostream>
 #include <string>
 #include <stdlib.h> //esto es necesario para obtener números aleatorios y también para limpiar la pantalla
 #include <ctime>
 #include <ncurses.h>
-
-//~ #ifdef _WIN32 || _WIN64
-//~ const char os_name = 'W';
-//~ #elif __linux__ || __unix
-//~ const char os_name = 'L';
-//~ #else
-//~ const char os_name = 'O'; //other
-//~ #endif
-
+#include <iostream>
 void mostrar_lista(const std::string conjunto[],std::string estado[],unsigned short &mostrar, const int valor = 0){
 	for (short int i = mostrar-25; i <= mostrar ;i++){
 		for (int j = 0; j < conjunto[i].size(); j++)
@@ -72,43 +63,47 @@ int main(){
 			estado[i].push_back('N');
 		}
 	}
-	
-
 	mostrar_lista(array,estado,mostrar); 
 
 	printw("Ingresar texto: ");
 	refresh();
 	int pos_cursor_x; //guarda la posición del cursor que va a estar en algún lugar después de "Ingresar texto: "
 	int pos_cursor_y;
+	cbreak();
+	short int palabras_correctas = 0;
+	int pulsaciones_correctas = 0; //cantidad total de pulsaciones correctas
 	for (uint8_t i = 0; i < 200 and time(NULL) < tiempo_limite;i++){
+		int cant_car_correct = 0; //cantidad de pulsaciones correctas en la actual palabra
 		for (int j = 0; j < array[i].size(); j++)
 		{
-			respuesta = getchar();
-			refresh();
-			//~ if (respuesta == array[i]){ 
-			if (respuesta == array[i][j]) {
+			respuesta = getch();
+			if (respuesta == KEY_BACKSPACE) {
+				i--;
+				getyx(stdscr,pos_cursor_y,pos_cursor_x);
+				mvdelch(pos_cursor_y,pos_cursor_x-1);
+				refresh();
+				continue;
+			} else if (respuesta == array[i][j]) {
 				estado[i][j] = 'T';
+				cant_car_correct++;
+				pulsaciones_correctas++;
 			} else {
 				estado[i][j] = 'F';
 			}
 			getyx(stdscr,pos_cursor_y,pos_cursor_x);
 			move(0,0);
-			mostrar_lista(array,estado,mostrar);
+			mostrar_lista(array,estado,mostrar,i);
 			move(pos_cursor_y,pos_cursor_x);
 			refresh();
 		}
+		getch();
+		move(pos_cursor_y,0);
+		clrtoeol();
+		printw("Ingresar texto: ");
+		refresh();
+		if (cant_car_correct == array[i].size()) palabras_correctas++;
 	}
-
-	//~ short int palabras_correctas = 0; //por alguna razón si uso uint8_t, al momento de mostrarlo mediante cout me aparece el código ascii correspondiente
-	//~ unsigned short pulsaciones = 0;
-	//~ for (uint8_t i = 0; i<200;i++){
-		//~ if (estado[i] == 'T') {
-			//~ palabras_correctas += 1;
-			//~ pulsaciones += array[i].length();
-
-		//~ }
-	//~ }
-	//~ std::cout << "\nPalabras por minuto: " << palabras_correctas << "\n";
-	//~ std::cout << "Pulsaciones por minuto: " << pulsaciones << "\n";
 	endwin();
+	std::cout << "\nPalabras por minuto: " << palabras_correctas << std::endl;
+	std::cout << "\nPulsaciones por minuto: " << pulsaciones_correctas << std::endl;
 }
