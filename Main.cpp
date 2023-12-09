@@ -35,6 +35,7 @@ void mostrar_lista(const std::string conjunto[],std::string estado[],unsigned sh
 
 int main(){	
 	initscr();
+	noecho(); //evita el eco de funciones como getch()
 	start_color();
 	init_pair(1,COLOR_GREEN,COLOR_BLACK);
 	init_pair(2,COLOR_RED,COLOR_BLACK);
@@ -74,20 +75,28 @@ int main(){
 	int pulsaciones_correctas = 0; //cantidad total de pulsaciones correctas
 	for (uint8_t i = 0; i < 200 and time(NULL) < tiempo_limite;i++){
 		int cant_car_correct = 0; //cantidad de pulsaciones correctas en la actual palabra
-		for (int j = 0; j < array[i].size(); j++)
+		for (int j = 0; j < array[i].size()+1; j++)
 		{
 			respuesta = getch();
-			if (respuesta == KEY_BACKSPACE) {
-				i--;
+			
+			if (respuesta == KEY_BACKSPACE or respuesta == 127 or respuesta == '\b') {
+				if (j==0) {
+					j--;
+					continue;
+				}
 				getyx(stdscr,pos_cursor_y,pos_cursor_x);
 				mvdelch(pos_cursor_y,pos_cursor_x-1);
-				refresh();
-				continue;
-			} else if (respuesta == array[i][j]) {
+				j--;
+				estado[i][j] = 'N';
+				j--;
+				
+			} else if (j < array[i].size()+1 && respuesta == array[i][j]) {
+				printw("%c",respuesta);
 				estado[i][j] = 'T';
 				cant_car_correct++;
 				pulsaciones_correctas++;
-			} else {
+			} else if (j < array[i].size()+1) {
+				printw("%c",respuesta);
 				estado[i][j] = 'F';
 			}
 			getyx(stdscr,pos_cursor_y,pos_cursor_x);
@@ -96,7 +105,6 @@ int main(){
 			move(pos_cursor_y,pos_cursor_x);
 			refresh();
 		}
-		getch();
 		move(pos_cursor_y,0);
 		clrtoeol();
 		printw("Ingresar texto: ");
@@ -104,6 +112,9 @@ int main(){
 		if (cant_car_correct == array[i].size()) palabras_correctas++;
 	}
 	endwin();
-	std::cout << "\nPalabras por minuto: " << palabras_correctas << std::endl;
+	int tiempo_transcurrido = time(NULL)-tiempo_inicial;
+	int palabras_por_minuto = (60*palabras_correctas)/tiempo_transcurrido;
+	int pulsaciones_por_minuto = (60*pulsaciones_correctas)/tiempo_transcurrido;
+	std::cout << "\nPalabras por minuto: " << palabras_por_minuto << std::endl;
 	std::cout << "\nPulsaciones por minuto: " << pulsaciones_correctas << std::endl;
 }
