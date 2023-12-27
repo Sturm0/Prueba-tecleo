@@ -2,5 +2,4 @@ Dentro de la carpeta compilado se encuentra el .out para utilizar en sistemas GN
 
 Aclaro que dichos ejecutables no necesariamente incorporan los últimos cambios hechos al código fuente, por tanto se recomienda compilar de forma manual.
 
-Para salir del programa escribir "salir" (sin las comillas). Porque, en caso contrario, las funciones de las teclas enter y barra espaciadora van a quedar intercambiadas.
-
+Para salir del programa escribir "salir" (sin las comillas).
