@@ -1,2 +1,5 @@
-Main: Main.cpp
-	g++ -o Main  Main.cpp -lncurses -DTEST --debug -g
+.PHONY: clean
+Main: Main.cpp clean
+	g++ -o ./Compilado/$@  $< -lncursesw -DTEST --debug -g
+clean:
+	rm -f Main

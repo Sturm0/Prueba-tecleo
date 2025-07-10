@@ -3,24 +3,26 @@
 #include <ctime>
 #include <ncurses.h>
 #include <iostream>
-void mostrar_lista(const std::string conjunto[],std::string estado[],unsigned short &mostrar, const int valor = 0){
+
+
+void mostrar_lista(const std::wstring conjunto[],std::string estado[],unsigned short &mostrar, const int valor = 0){
 	for (short int i = mostrar-25; i <= mostrar ;i++){
 		for (int j = 0; j < conjunto[i].size(); j++)
 		{
 			switch(estado[i][j]){
 				case 'N':
-					printw("%c",conjunto[i][j]);
+					printw("%lc",conjunto[i][j]);
 					refresh();
 					break;
 				case 'T':
 					attron(COLOR_PAIR(1));
-					printw("%c",conjunto[i][j]);
+					printw("%lc",conjunto[i][j]);
 					attroff(COLOR_PAIR(1));
 					refresh();
 					break;
 				default:
 					attron(COLOR_PAIR(2));
-					printw("%c",conjunto[i][j]);
+					printw("%lc",conjunto[i][j]);
 					attroff(COLOR_PAIR(2));
 					refresh();
 					break;
@@ -34,15 +36,16 @@ void mostrar_lista(const std::string conjunto[],std::string estado[],unsigned sh
 }
 
 int main(){	
+	setlocale(LC_ALL, "");
 	initscr();
 	noecho(); //evita el eco de funciones como getch()
 	start_color();
 	init_pair(1,COLOR_GREEN,COLOR_BLACK);
 	init_pair(2,COLOR_RED,COLOR_BLACK);
-	std::string array[200] = {"de", "Y", "el", "la", "en", "a", "que", "los", "se", "que", "un", "las", "con", "no", "por", "una", "para", "su", "es", "como", "me", "más", "le", "lo", "o", "pero", "sus", "si", "este", "sobre", "entre", "cuando", "también", "todo", "era", "fue", "esta", "ya", "son", "mi", "sin", "la", "años", "ser", "nos", "te", "qué", "dos", "está", "muy", "desde", "porque", "yo", "hasta", "había", "hay", "tiene", "ese", "todos", "hacer", "donde", "eso", "puede", "parte", "vida", "uno", "esa", "tiempo", "él", "ella", "sólo", "dijo", "cada", "vez", "ni", "otro", "después", "otros", "mismo", "hace", "ahora", "les", "estaba", "así", "bien", "e", "día", "año", "aunque", "durante", "país", "siempre", "otra", "tres", "algo", "ver", "mundo", "los", "tan", "antes", "sí", "cómo", "casa", "nada", "trabajo", "estos", "momento", "quien", "están", "gran", "esto", "forma", "mayor", "personas", "ellos", "nacional", "gobierno", "sino", "primera", "unos", "hacia", "tenía", "entonces", "hoy", "lugar", "ante", "luego", "estado", "otras", "días", "tener", "pues", "va", "contra", "nunca", "casi", "tienen", "según", "algunos", "una", "manera", "nuevo", "además", "hombre", "millones", "dar", "mucho", "veces", "menos", "todas", "primer", "presidente", "decir", "mujer", "tu", "solo", "mientras", "cosas", "mí", "debe", "tanto", "aquí", "estas", "ciudad", "fueron", "historia", "más", "sin embargo", "toda", "tras", "pueden", "dice", "tipo", "las", "grupo", "cual", "social", "gente", "sistema", "desarrollo", "mejor", "noche", "misma", "estar", "lado", "muchos", "sea", "cuenta", "mujeres", "agua", "importante", "aún", "dentro", "cuatro", "información", "mis", "madre", "salud", "nuestro", "será"};
+	std::wstring array[200] = {L"de", L"Y", L"el", L"la", L"en", L"a", L"que", L"los", L"se", L"que", L"un", L"las", L"con", L"no", L"por", L"una", L"para", L"su", L"es", L"como", L"me", L"más", L"le", L"lo", L"o", L"pero", L"sus", L"si", L"este", L"sobre", L"entre", L"cuando", L"también", L"todo", L"era", L"fue", L"esta", L"ya", L"son", L"mi", L"sin", L"la", L"años", L"ser", L"nos", L"te", L"qué", L"dos", L"está", L"muy", L"desde", L"porque", L"yo", L"hasta", L"había", L"hay", L"tiene", L"ese", L"todos", L"hacer", L"donde", L"eso", L"puede", L"parte", L"vida", L"uno", L"esa", L"tiempo", L"él", L"ella", L"sólo", L"dijo", L"cada", L"vez", L"ni", L"otro", L"después", L"otros", L"mismo", L"hace", L"ahora", L"les", L"estaba", L"así", L"bien", L"e", L"día", L"año", L"aunque", L"durante", L"país", L"siempre", L"otra", L"tres", L"algo", L"ver", L"mundo", L"los", L"tan", L"antes", L"sí", L"cómo", L"casa", L"nada", L"trabajo", L"estos", L"momento", L"quien", L"están", L"gran", L"esto", L"forma", L"mayor", L"personas", L"ellos", L"nacional", L"gobierno", L"sino", L"primera", L"unos", L"hacia", L"tenía", L"entonces", L"hoy", L"lugar", L"ante", L"luego", L"estado", L"otras", L"días", L"tener", L"pues", L"va", L"contra", L"nunca", L"casi", L"tienen", L"según", L"algunos", L"una", L"manera", L"nuevo", L"además", L"hombre", L"millones", L"dar", L"mucho", L"veces", L"menos", L"todas", L"primer", L"presidente", L"decir", L"mujer", L"tu", L"solo", L"mientras", L"cosas", L"mí", L"debe", L"tanto", L"aquí", L"estas", L"ciudad", L"fueron", L"historia", L"más", L"sinembargo", L"toda", L"tras", L"pueden", L"dice", L"tipo", L"las", L"grupo", L"cual", L"social", L"gente", L"sistema", L"desarrollo", L"mejor", L"noche", L"misma", L"estar", L"lado", L"muchos", L"sea", L"cuenta", L"mujeres", L"agua", L"importante", L"aún", L"dentro", L"cuatro", L"información", L"mis", L"madre", L"salud", L"nuestro", L"será"};
 	std::string estado[200]; //contiene el estado del array desordenado, esto determina en que color se va a mostrar
 
-	char respuesta;
+	wint_t respuesta;
 	int tiempo_inicial = time(NULL);
 	int tiempo_limite = tiempo_inicial+60;
 	unsigned short mostrar = 25; //esta variable es usada para decidir que palabras mostrar y cuales no
@@ -77,7 +80,7 @@ int main(){
 		int cant_car_correct = 0; //cantidad de pulsaciones correctas en la actual palabra
 		for (int j = 0; j < array[i].size()+1; j++)
 		{
-			respuesta = getch();
+			get_wch(&respuesta);
 			
 			if (respuesta == KEY_BACKSPACE or respuesta == 127 or respuesta == '\b') {
 				if (j==0) {
@@ -91,12 +94,12 @@ int main(){
 				j--;
 				
 			} else if (j < array[i].size()+1 && respuesta == array[i][j]) {
-				printw("%c",respuesta);
+				printw("%lc",respuesta);
 				estado[i][j] = 'T';
 				cant_car_correct++;
 				pulsaciones_correctas++;
 			} else if (j < array[i].size()+1) {
-				printw("%c",respuesta);
+				printw("%lc",respuesta);
 				estado[i][j] = 'F';
 			}
 			getyx(stdscr,pos_cursor_y,pos_cursor_x);

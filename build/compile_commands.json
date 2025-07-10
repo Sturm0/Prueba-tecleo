@@ -1,0 +1,17 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-DTEST",
+      "--debug",
+      "-g",
+      "-o",
+      "Main",
+      "Main.cpp"
+    ],
+    "directory": "/home/federico/Documentos/Prueba-tecleo",
+    "file": "/home/federico/Documentos/Prueba-tecleo/Main.cpp",
+    "output": "/home/federico/Documentos/Prueba-tecleo/Main"
+  }
+]
