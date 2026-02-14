@@ -19,7 +19,7 @@ indent_mode=2
 
 [project]
 name=Prueba-tecleo
-base_path=/home/federico/Documentos/Prueba-tecleo
+base_path=/home/federico/Documents/Prueba-tecleo
 description=
 file_patterns=
 
@@ -29,12 +29,12 @@ long_line_column=72
 
 [files]
 current_page=2
-FILE_NAME_0=5343;C++;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocumentos%2FPrueba-tecleo%2FMain.cpp;0;4
-FILE_NAME_1=2035;C++;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocumentos%2FPrueba-tecleo%2Fprobando.cpp;0;4
-FILE_NAME_2=90;Make;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocumentos%2FPrueba-tecleo%2Fmakefile;0;4
+FILE_NAME_0=4592;C++;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocuments%2FPrueba-tecleo%2FMain.cpp;0;4
+FILE_NAME_1=150;Markdown;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocuments%2FPrueba-tecleo%2FREADME.md;0;4
+FILE_NAME_2=132;Make;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocuments%2FPrueba-tecleo%2Fmakefile;0;4
 
 [VTE]
-last_dir=/home/federico/Documentos/Prueba-tecleo
+last_dir=/home/federico/Documents/Prueba-tecleo
 
 [lsp]
 enabled=true
@@ -43,5 +43,5 @@ config_file=/home/federico/Documentos/Prueba-tecleo/pal_proyecto_lsp.conf
 
 [build-menu]
 EX_00_LB=_Execute
-EX_00_CM="./Compilado/%e"
+EX_00_CM="./%e"
 EX_00_WD=
