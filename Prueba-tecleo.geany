@@ -28,10 +28,10 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=2
+current_page=1
 FILE_NAME_0=4592;C++;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocuments%2FPrueba-tecleo%2FMain.cpp;0;4
-FILE_NAME_1=150;Markdown;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocuments%2FPrueba-tecleo%2FREADME.md;0;4
-FILE_NAME_2=276;Make;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocuments%2FPrueba-tecleo%2Fmakefile;0;4
+FILE_NAME_1=332;Markdown;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocuments%2FPrueba-tecleo%2FREADME.md;0;4
+FILE_NAME_2=157;Make;0;EUTF-8;1;1;0;%2Fhome%2Ffederico%2FDocuments%2FPrueba-tecleo%2Fmakefile;0;4
 
 [VTE]
 last_dir=/home/federico/Documents/Prueba-tecleo
